@@ -1,0 +1,42 @@
+---
+title: "Operadores pipe do tidyverse (`%>%`) e pipe nativo (`|>`) do R"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+
+---
+
+## O que você encontra aqui?
+
+- Aulas **curtas** e **objetivas**
+- Materiais no Github: 
+
+## Links de referência
+
+As seguintes fontes foram utilizadas:
+
+-   [Stackoverflow](https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe)
+-   [Understanding the native pipe - Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b) 
+
+## O primeiro pipe: `%>%` do pacote `magrittr`
+
+O *pipe* é um operador que vai **empilhar comandos**. 
+
+```{r, eval = FALSE, echo = TRUE}
+library(magrittr)
+mtcars %>% dplyr::select(am, hp)
+```
+
+- Melhora muito a **legibilidade do código** e transformou a **sintaxe** de grande parte dos códigos em R.
+
+- É importado por diversos pacotes (`tidyverse`, `dplyr`, ...), mas o original é o `magrittr`.
+
+## Exemplos do `%>%`
+
+## O novo pipe: `|>` incorporado ao R-base
+
+
