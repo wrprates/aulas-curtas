@@ -13,14 +13,8 @@ format:
 ## O que você encontra aqui?
 
 - Aulas **curtas** e **objetivas**
-- Materiais no Github: 
+- Materiais no Github: <https://github.com/wrprates/aulas-curtas>
 
-## Links de referência
-
-As seguintes fontes foram utilizadas:
-
--   [Stackoverflow](https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe)
--   [Understanding the native pipe - Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b) 
 
 ## O primeiro pipe: `%>%` do pacote `magrittr`
 
@@ -39,4 +33,10 @@ mtcars %>% dplyr::select(am, hp)
 
 ## O novo pipe: `|>` incorporado ao R-base
 
+## Links de referência
+
+As seguintes fontes foram utilizadas:
+
+-   [Stackoverflow](https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe)
+-   [Understanding the native pipe - Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b) 
 
