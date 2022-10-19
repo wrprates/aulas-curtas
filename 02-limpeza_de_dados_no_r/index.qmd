@@ -1,0 +1,82 @@
+---
+title: "Limpeza de dados no R"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+## O que você encontra aqui?
+
+-   Aulas **curtas** e **objetivas**
+-   Materiais no Github: <https://github.com/wrprates/aulas-curtas>
+
+## Limpeza de dados no R
+
+-   Antes de qualquer análise precisamos fazer a limpeza de dados.
+
+-   O R possui vários `pacotes` para limpeza e transformação de dados.
+
+-   Isso facilita muito todo o processo e garante a **consistência** e **confiabilidade** do estudo.
+
+## Janitor
+
+clean_names() - Ajusta o nome das colunas
+
+```{r, eval = FALSE, echo = TRUE}
+library(janitor)
+x <- data.frame(caseID = 1, DOB = 2, Other = 3, "Teste Espaço" = 4)
+clean_names(x)
+```
+
+Resultado
+
+```{r, eval = FALSE, echo = TRUE}
+  case_id dob other teste_espaco
+1       1   2     3            4
+```
+
+## Janitor
+
+get_dupes() - Apresenta os dados duplicados
+
+```{r, eval = FALSE, echo = TRUE}
+library(janitor)
+get_dupes(mtcars, mpg, hp)
+```
+
+Resultado
+
+```{r, eval = FALSE, echo = TRUE}
+  mpg  hp dupe_count cyl disp drat    wt  qsec vs am gear carb
+1  21 110          2   6  160  3.9 2.620 16.46  0  1    4    4
+2  21 110          2   6  160  3.9 2.875 17.02  0  1    4    4
+```
+
+## data.validator
+
+```{r, eval = FALSE, echo = TRUE}
+library(data.validator)
+
+report <- data_validation_report()
+
+between <- function(a, b) {
+  function(x) { a <= x && x <= b }
+}
+
+validate(iris, name = "Verifying flower dataset") %>%
+  validate_if(Sepal.Length > 0, description = "Sepal length is greater than 0") %>%
+  validate_cols(between(0, 4), Sepal.Width, description = "Sepal width is between 0 and 4") %>%
+  add_results(report)
+
+print(report)
+```
+
+## Links de referência
+
+As seguintes fontes foram utilizadas:
+
+-   [cran.r-project.org](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
