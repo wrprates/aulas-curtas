@@ -79,4 +79,4 @@ print(report)
 
 As seguintes fontes foram utilizadas:
 
--   [cran.r-project.org](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
+-   [cran.r-project.org - Janitor](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
