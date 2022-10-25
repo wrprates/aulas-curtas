@@ -1205,42 +1205,127 @@ margin-right: 0; }
     <div class="slides">
 
 <section id="title-slide" class="center">
-  <h1 class="title">Operadores pipe do tidyverse (<code>%&gt;%</code>) e pipe nativo (<code>|&gt;</code>) do R</h1>
+  <h1 class="title">Operadores pipe do <code>tidyverse</code> (<code>%&gt;%</code>) e pipe <code>nativo</code> (<code>|&gt;</code>) do R</h1>
   <p class="author">Wlademir Prates</p>
 </section>
 
-<section id="o-que-você-encontra-aqui" class="slide level2">
+<section id="o-que-você-encontra-aqui" class="slide level2" data-background-color="#25325f">
 <h2>O que você encontra aqui?</h2>
 <ul>
 <li class="fragment">Aulas <strong>curtas</strong> e <strong>objetivas</strong></li>
-<li class="fragment">Materiais no Github: <a href="https://github.com/wrprates/aulas-curtas" class="uri">https://github.com/wrprates/aulas-curtas</a></li>
+<li class="fragment">Repositório público:
+<ul>
+<li class="fragment"><blockquote>
+<a href="https://github.com/wrprates/aulas-curtas" class="uri">https://github.com/wrprates/aulas-curtas</a>
+</blockquote></li>
+</ul></li>
 </ul>
 </section>
 <section id="o-primeiro-pipe-do-pacote-magrittr" class="slide level2">
 <h2>O primeiro pipe: <code>%&gt;%</code> do pacote <code>magrittr</code></h2>
 <p>O <em>pipe</em> é um operador que vai <strong>empilhar comandos</strong>.</p>
+<p>Isso:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">library</span>(magrittr)</span>
-<span id="cb1-2"><a href="#cb1-2"></a>mtcars <span class="sc">%&gt;%</span> dplyr<span class="sc">::</span><span class="fu">select</span>(am, hp)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1"></a><span class="fu">head</span>(mtcars, <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
+<p>Se torna isso:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1"></a><span class="fu">library</span>(magrittr)</span>
+<span id="cb2-2"><a href="#cb2-2"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   mpg cyl disp  hp drat    wt  qsec vs am gear carb
+Mazda RX4         21.0   6  160 110 3.90 2.620 16.46  0  1    4    4
+Mazda RX4 Wag     21.0   6  160 110 3.90 2.875 17.02  0  1    4    4
+Datsun 710        22.8   4  108  93 3.85 2.320 18.61  1  1    4    1
+Hornet 4 Drive    21.4   6  258 110 3.08 3.215 19.44  1  0    3    1
+Hornet Sportabout 18.7   8  360 175 3.15 3.440 17.02  0  0    3    2</code></pre>
+</div>
+</div>
+</section>
+<section id="ou" class="slide level2">
+<h2>ou …</h2>
+<p>Isso:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1"></a><span class="fu">head</span>(mtcars[mtcars[[<span class="st">&quot;am&quot;</span>]] <span class="sc">==</span> <span class="dv">1</span>, <span class="fu">c</span>(<span class="st">&quot;am&quot;</span>, <span class="st">&quot;mpg&quot;</span>, <span class="st">&quot;cyl&quot;</span>)], <span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Se torna isso:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb5-2"><a href="#cb5-2"></a>mtcars <span class="sc">%&gt;%</span> <span class="fu">select</span>(am, mpg, cyl) <span class="sc">%&gt;%</span> <span class="fu">filter</span>(am <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">%&gt;%</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              am  mpg cyl
+Mazda RX4      1 21.0   6
+Mazda RX4 Wag  1 21.0   6
+Datsun 710     1 22.8   4
+Fiat 128       1 32.4   4
+Honda Civic    1 30.4   4</code></pre>
+</div>
+</div>
+</section>
+<section id="vantagens-do-operador-pipe" class="slide level2" data-background-color="#25325f">
+<h2>Vantagens do operador <code>pipe</code></h2>
 <ul>
 <li class="fragment"><p>Melhora muito a <strong>legibilidade do código</strong> e transformou a <strong>sintaxe</strong> de grande parte dos códigos em R.</p></li>
 <li class="fragment"><p>É importado por diversos pacotes (<code>tidyverse</code>, <code>dplyr</code>, …), mas o original é o <code>magrittr</code>.</p></li>
+<li class="fragment"><p>Foi tão importante para o R que foi desenvolvido um novo operador <code>pipe</code> <strong>nativo do R</strong>.</p></li>
 </ul>
-</section>
-<section id="exemplos-do" class="slide level2">
-<h2>Exemplos do <code>%&gt;%</code></h2>
 </section>
 <section id="o-novo-pipe-incorporado-ao-r-base" class="slide level2">
 <h2>O novo pipe: <code>|&gt;</code> incorporado ao R-base</h2>
+<p>Diversas melhorias no R a partir da versão 4.0, entre elas o <code>pipe</code> nativo do R.</p>
+<p><strong>Não precisa instalar nenhum pacote</strong>.</p>
+<p>Exemplo:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1"></a>mtcars <span class="sc">|&gt;</span> <span class="fu">select</span>(am, mpg, cyl) <span class="sc">|&gt;</span> <span class="fu">filter</span>(am <span class="sc">==</span> <span class="dv">1</span>) <span class="sc">|&gt;</span> <span class="fu">head</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>              am  mpg cyl
+Mazda RX4      1 21.0   6
+Mazda RX4 Wag  1 21.0   6
+Datsun 710     1 22.8   4
+Fiat 128       1 32.4   4
+Honda Civic    1 30.4   4</code></pre>
+</div>
+</div>
 </section>
-<section id="links-de-referência" class="slide level2">
-<h2>Links de referência</h2>
-<p>As seguintes fontes foram utilizadas:</p>
+<section id="outro-exemplo-com" class="slide level2">
+<h2>Outro exemplo com <code>|&gt;</code></h2>
+<p>Calculando algumas estatísticas da variável HP para os carros <strong>manuais</strong> e <strong>automáticos</strong>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1"></a>mtcars <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2"></a>  <span class="fu">group_by</span>(am) <span class="sc">|&gt;</span></span>
+<span id="cb9-3"><a href="#cb9-3"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb9-4"><a href="#cb9-4"></a>    <span class="at">mean_hp =</span> <span class="fu">mean</span>(hp),</span>
+<span id="cb9-5"><a href="#cb9-5"></a>    <span class="at">max_hp =</span> <span class="fu">max</span>(hp),</span>
+<span id="cb9-6"><a href="#cb9-6"></a>    <span class="at">min_hp =</span> <span class="fu">min</span>(hp),</span>
+<span id="cb9-7"><a href="#cb9-7"></a>    <span class="at">sd_hp =</span> <span class="fu">sd</span>(hp)</span>
+<span id="cb9-8"><a href="#cb9-8"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2 × 5
+     am mean_hp max_hp min_hp sd_hp
+  &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+1     0    160.    245     62  53.9
+2     1    127.    335     52  84.1</code></pre>
+</div>
+</div>
+</section>
+<section id="considerações" class="slide level2" data-background-color="#25325f">
+<h2>Considerações</h2>
+<ul>
+<li class="fragment">Para <strong>programadores R</strong>: essencial programar com <strong>operador pipe</strong>.</li>
+<li class="fragment">Dê preferência ao <strong>operador nativo</strong> do R (<code>|&gt;</code>), pois não precisa <strong>importar pacotes</strong>.</li>
+<li class="fragment">Existem diferenças de uso entre <code>%&gt;%</code> e <code>|&gt;</code>, mas em geral são situações específicas e tópicos mais avançados.</li>
+<li class="fragment">Na maioria das vezes ambos operadores fazem a mesma coisa.</li>
+</ul>
+</section>
+<section id="leitura-complementar" class="slide level2">
+<h2>Leitura complementar</h2>
 <ul>
 <li class="fragment"><a href="https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe">Stackoverflow</a></li>
 <li class="fragment"><a href="https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b">Understanding the native pipe - Isabella Velásquez</a></li>
 </ul>
+</section>
+<section id="operadores-pipe-do-tidyverse-e-pipe-nativo-do-r" class="title-slide slide level1 center" data-background-color="#25325f">
+<h1>Operadores pipe do <code>tidyverse</code> (<code>%&gt;%</code>) e pipe <code>nativo</code> (<code>|&gt;</code>) do R</h1>
 <div class="footer footer-default">
 
 </div>
