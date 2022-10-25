@@ -1,5 +1,5 @@
 ---
-title: "Operadores pipe do tidyverse (`%>%`) e pipe nativo (`|>`) do R"
+title: "Operadores pipe do `tidyverse` (`%>%`) e pipe `nativo` (`|>`) do R"
 author: "Wlademir Prates"
 format:
   revealjs: 
@@ -10,33 +10,86 @@ format:
 
 ---
 
-## O que você encontra aqui?
+## O que você encontra aqui? {background-color="#25325f"}
 
 - Aulas **curtas** e **objetivas**
-- Materiais no Github: <https://github.com/wrprates/aulas-curtas>
-
+- Repositório público: 
+  - <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
 
 ## O primeiro pipe: `%>%` do pacote `magrittr`
 
-O *pipe* é um operador que vai **empilhar comandos**. 
+O *pipe* é um operador que vai **empilhar comandos**.
 
-```{r, eval = FALSE, echo = TRUE}
-library(magrittr)
-mtcars %>% dplyr::select(am, hp)
+Isso:
+```{r, echo=TRUE, eval=FALSE}
+head(mtcars, 5)
 ```
+
+Se torna isso:
+```{r, echo=TRUE}
+library(magrittr)
+mtcars %>% head(5)
+```
+
+## ou ...
+
+Isso:
+```{r, echo=TRUE, eval=FALSE}
+head(mtcars[mtcars[["am"]] == 1, c("am", "mpg", "cyl")], 5)
+```
+
+Se torna isso:
+```{r, echo=TRUE}
+library(dplyr)
+mtcars %>% select(am, mpg, cyl) %>% filter(am == 1) %>% head(5)
+```
+
+## Vantagens do operador `pipe` {background-color="#25325f"}
 
 - Melhora muito a **legibilidade do código** e transformou a **sintaxe** de grande parte dos códigos em R.
 
 - É importado por diversos pacotes (`tidyverse`, `dplyr`, ...), mas o original é o `magrittr`.
 
-## Exemplos do `%>%`
+- Foi tão importante para o R que foi desenvolvido um novo operador `pipe` **nativo do R**.
 
 ## O novo pipe: `|>` incorporado ao R-base
 
-## Links de referência
+Diversas melhorias no R a partir da versão 4.0, entre elas o `pipe` nativo do R.
 
-As seguintes fontes foram utilizadas:
+**Não precisa instalar nenhum pacote**.
+
+Exemplo:
+
+```{r, echo=TRUE}
+mtcars |> select(am, mpg, cyl) |> filter(am == 1) |> head(5)
+```
+
+## Outro exemplo com `|>`
+
+Calculando algumas estatísticas da variável HP para os carros **manuais** e **automáticos**.
+
+```{r, echo=TRUE}
+mtcars |>
+  group_by(am) |>
+  summarise(
+    mean_hp = mean(hp),
+    max_hp = max(hp),
+    min_hp = min(hp),
+    sd_hp = sd(hp)
+  )
+```
+
+## Considerações {background-color="#25325f"}
+
+- Para **programadores R**: essencial programar com **operador pipe**.
+- Dê preferência ao **operador nativo** do R (`|>`), pois não precisa **importar pacotes**.
+- Existem diferenças de uso entre ` %>%` e `|>`, mas em geral são situações específicas e tópicos mais avançados.
+- Na maioria das vezes ambos operadores fazem a mesma coisa.
+
+
+## Leitura complementar
 
 -   [Stackoverflow](https://stackoverflow.com/questions/67633022/what-are-the-differences-between-rs-new-native-pipe-and-the-magrittr-pipe)
 -   [Understanding the native pipe - Isabella Velásquez](https://towardsdatascience.com/understanding-the-native-r-pipe-98dea6d8b61b) 
 
+# Operadores pipe do `tidyverse` (`%>%`) e pipe `nativo` (`|>`) do R {background-color="#25325f"}
