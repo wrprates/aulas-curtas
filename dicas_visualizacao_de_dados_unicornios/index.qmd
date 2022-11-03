@@ -1,0 +1,42 @@
+---
+title: "4 dicas de `visualização` de dados"
+subtitle: "Para aplicar em `qualquer` ferramenta"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+
+---
+
+## O que você encontra aqui? {background-color="#25325f"}
+
+- Aulas **curtas** e **objetivas**
+- Repositório público: 
+  - <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+- O seguinte link será guia para este vídeo:
+  - <blockquote><https://wrprates.com/posts/unicorn-companies-treemaps-in-r/></blockquote>
+
+# 1. Usar sempre as `mesmas cores` {background-color="#25325f"}
+
+- Ao longo de um documento, usar sempre a mesma cor para as mesmas categorias.
+
+# 2. Escolha bem o `tipo de gráfico`
+
+- Para mostrar `n` maiores valores para uma variável, gráfico de barras; 
+- Para mostrar parte de um todo, *tree map*.
+
+# 3. `Tabela` também é forma de visualizar dados {background-color="#25325f"}
+
+- As vezes uma tabela com possibilidade de **ordenar** e **pesquisar** vale mais que muitos gráficos.
+
+# 4. Mostrar os valores `mais relevantes`
+
+- Mostrar os valores mais importantes nas respectivas categorias, principalmente se o gráfico não for interativo.
+
+# 4 dicas de `visualização` de dados {background-color="#25325f"}
+
+Para aplicar em `qualquer` ferramenta
