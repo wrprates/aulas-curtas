@@ -1,0 +1,173 @@
+---
+title: "Limpeza de dados no R: `Janitor`"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+## O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+## Limpeza de dados no R
+
+-   Antes de qualquer análise precisamos fazer a limpeza de dados.
+
+-   O R possui vários `pacotes` para limpeza e transformação de dados.
+
+-   Isso facilita muito todo o processo e garante a **consistência** e **confiabilidade** do estudo.
+
+## Janitor 
+
+
+O `Janitor` foi desenvolvido tendo em mente os usuários de R do iniciante ao intermediário, é otimizado para facilidade de uso. Segue os princípios do "**tidyverse**" e funciona bem com o **%>%** (pipe).
+
+
+As principais funções: 
+
+- Formata perfeitamente os nomes das colunas data.frame.
+
+- Fornece contagens rápidas de combinações de variáveis.
+
+- Isola e apaga registros duplicados.
+
+
+## Janitor 
+
+clean_names() - Ajusta o nome das colunas
+
+
+Colunas com problema:
+
+```{r}
+print("caseID DOB Other Coluna com Espaço")
+```
+
+
+Utilizando a função clean_names():
+
+```{r, echo = TRUE}
+library(janitor)
+x <- data.frame(caseID = 1, DOB = 2, Other = 3, "Coluna com Espaço" = 4)
+clean_names(x)
+```
+
+## Janitor
+
+get_dupes() - Apresenta os dados duplicados
+
+Exemplo:
+
+```{r, echo=TRUE}
+library(janitor)
+get_dupes(mtcars, mpg, hp)
+```
+
+## Janitor
+
+tably() - Apresenta contagens rápidas dos dados das tabelas (sendo compatível com o pipe %>% e outros recursos)
+```{r, echo=TRUE}
+library(janitor)
+mtcars %>%
+  tabyl(cyl, gear) #o mesmo que tabyl(mtcars, cyl, gear)
+```
+
+## Janitor
+
+compare_df_cols() - Compara as colunas de diferentes data frames e seus tipos
+
+```{r, echo=TRUE}
+library(dplyr)
+df1 <- data.frame(a = 1:2, b = c("pequeno", "grande"))
+df2 <- data.frame(a = 10:12, b = c("médio", "pequeno", "grande"), c = 0, stringsAsFactors = TRUE) #aqui, a coluna b é um fator
+df3 <- df1 %>%
+  dplyr::mutate(b = as.character(b))
+
+
+compare_df_cols(df1, df2, df3, return = "mismatch", bind_method = "rbind")
+```
+
+## Janitor
+
+compare_df_cols_same() faz a mesma comparação retornando verdadeiro ou falso para a consulta
+
+```{r, echo=TRUE}
+library(dplyr)
+df1 <- data.frame(a = 1:2, b = c("pequeno", "grande"))
+df2 <- data.frame(a = 10:12, b = c("médio", "pequeno", "grande"), c = 0, stringsAsFactors = TRUE) #no exemplo, a coluna b é um fator
+df3 <- df1 %>%
+  dplyr::mutate(b = as.character(b))
+
+compare_df_cols_same(df1, df2, df3)
+```
+
+## Janitor
+
+remove_empty() - Para casos como a limpeza de arquivos do Excel que contêm linhas e colunas vazias após serem lidos no R
+
+Data frame com valores em branco:
+
+```{r}
+q <- data.frame(v1 = c(1, NA, 3),
+                v2 = c(NA, NA, NA),
+                v3 = c("a", NA, "b"),
+                v4 = c("c",NA, NA),
+                V5 = c(NA, NA, 4))
+print(q)
+```
+
+## Janitor
+
+Exemplo do uso do remove_empty removendo colunas e linhas em branco:
+
+```{r, echo=TRUE}
+library(janitor)
+q <- data.frame(v1 = c(1, NA, 3),
+                v2 = c(NA, NA, NA),
+                v3 = c("a", NA, "b"),
+                v4 = c("c",NA, NA),
+                V5 = c(NA, NA, 4))
+q %>%
+  remove_empty(c("rows", "cols"))
+```
+
+## Janitor
+
+Data frame com colunas contendo dados iguais:
+
+```{r, echo=TRUE}
+c <- data.frame(id = c(1, 2, 3, 4),
+                country = c("Brazil","Brazil","Brazil", "Brazil"),
+                state = c("SP", "SP", "SP", "SP"),
+                client_name = c("João", "Maria", "José", "Fernanda"),
+                sex = c("M", "F", "M", NA))
+print(c)
+```
+
+## Janitor
+
+Exemplo do uso do remove_constant() removendo colunas que tem dados iguais:
+
+```{r, echo=TRUE}
+library(janitor)
+c <- data.frame(id = c(1, 2, 3, 4),
+                country = c("Brazil","Brazil","Brazil", "Brazil"),
+                state = c("SP", "SP", "SP", "SP"),
+                client_name = c("João", "Maria", "José", "Fernanda"),
+                sex = c("M", "F", "M", NA))
+c %>%
+  remove_constant()
+```
+
+## Leitura complementar
+
+-   [cran.r-project.org - Janitor](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
+-   [rdrr.io - Janitor](https://rdrr.io/cran/janitor/man/tabyl.html)
+
+# Limpeza de dados no R: `Janitor` {background-color="#25325f"}
