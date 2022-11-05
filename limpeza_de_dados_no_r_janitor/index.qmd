@@ -61,7 +61,7 @@ Apresenta contagens rápidas dos dados das tabelas (sendo compatível com o pipe
 ```{r, echo=TRUE}
 library(janitor)
 mtcars %>%
-  tabyl(cyl, gear) #o mesmo que tabyl(mtcars, cyl, gear)
+  tabyl(cyl, gear) # o mesmo que tabyl(mtcars, cyl, gear)
 ```
 
 ## Janitor - `compare_df_cols`
