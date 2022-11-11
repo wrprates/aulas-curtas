@@ -96,18 +96,28 @@ compare_df_cols(df1, df2, df3, return = "mismatch", bind_method = "rbind") # ten
 
 Executa a mesma comparação que em `compare_df_cols`, retornando verdadeiro ou falso para a consulta:
 ```{r, echo=TRUE}
+df1 <- tibble(a = 1:2, b = c("pequeno", "grande"))
+df2 <- tibble(a = 10:12, b = as.factor(c("médio", "pequeno", "grande")), c = 0) # no exemplo, a coluna b é um fator
+df3 <- tibble(a = 3:4, b = c("médio", "grande"))
+
+compare_df_cols(df1, df2, df3, return = "mismatch", bind_method = "rbind") # tente também "all" e "match"
+```
+
+## Janitor - `compare_df_cols_same`
+
+Executa a mesma comparação que em `compare_df_cols`, retornando verdadeiro ou falso para a consulta:
+```{r, echo=TRUE}
 compare_df_cols_same(df1, df2, df3)
 ```
 
 ## janitor - `remove_empty` {style="font-size: 0.75em;"}
-
 
 Remove colunas 100% vazias (`NA`).
 
 - Caso de uso: limpeza de arquivos do Excel que contêm linhas e colunas vazias após serem lidos no R.
 
 Tabela com valores em branco:
-```{r, echo = TRUE}
+```{r}
 df <- tibble(
   v1 = c(1, NA, 3),
   v2 = c(NA, NA, NA),

@@ -1342,7 +1342,23 @@ margin-right: 0; }
 <h2>janitor - <code>compare_df_cols_same</code></h2>
 <p>Executa a mesma comparação que em <code>compare_df_cols</code>, retornando verdadeiro ou falso para a consulta:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a><span class="fu">compare_df_cols_same</span>(df1, df2, df3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1"></a>df1 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">2</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;pequeno&quot;</span>, <span class="st">&quot;grande&quot;</span>))</span>
+<span id="cb16-2"><a href="#cb16-2"></a>df2 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">10</span><span class="sc">:</span><span class="dv">12</span>, <span class="at">b =</span> <span class="fu">as.factor</span>(<span class="fu">c</span>(<span class="st">&quot;médio&quot;</span>, <span class="st">&quot;pequeno&quot;</span>, <span class="st">&quot;grande&quot;</span>)), <span class="at">c =</span> <span class="dv">0</span>) <span class="co"># no exemplo, a coluna b é um fator</span></span>
+<span id="cb16-3"><a href="#cb16-3"></a>df3 <span class="ot">&lt;-</span> <span class="fu">tibble</span>(<span class="at">a =</span> <span class="dv">3</span><span class="sc">:</span><span class="dv">4</span>, <span class="at">b =</span> <span class="fu">c</span>(<span class="st">&quot;médio&quot;</span>, <span class="st">&quot;grande&quot;</span>))</span>
+<span id="cb16-4"><a href="#cb16-4"></a></span>
+<span id="cb16-5"><a href="#cb16-5"></a><span class="fu">compare_df_cols</span>(df1, df2, df3, <span class="at">return =</span> <span class="st">&quot;mismatch&quot;</span>, <span class="at">bind_method =</span> <span class="st">&quot;rbind&quot;</span>) <span class="co"># tente também &quot;all&quot; e &quot;match&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  column_name       df1     df2       df3
+1           b character  factor character
+2           c      &lt;NA&gt; numeric      &lt;NA&gt;</code></pre>
+</div>
+</div>
+</section>
+<section id="janitor---compare_df_cols_same-1" class="slide level2">
+<h2>Janitor - <code>compare_df_cols_same</code></h2>
+<p>Executa a mesma comparação que em <code>compare_df_cols</code>, retornando verdadeiro ou falso para a consulta:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1"></a><span class="fu">compare_df_cols_same</span>(df1, df2, df3)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>  column_name       ..1    ..2       ..3
 1           b character factor character</code></pre>
@@ -1360,14 +1376,6 @@ margin-right: 0; }
 </ul>
 <p>Tabela com valores em branco:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb19-2"><a href="#cb19-2"></a>  <span class="at">v1 =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="cn">NA</span>, <span class="dv">3</span>),</span>
-<span id="cb19-3"><a href="#cb19-3"></a>  <span class="at">v2 =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb19-4"><a href="#cb19-4"></a>  <span class="at">v3 =</span> <span class="fu">c</span>(<span class="st">&quot;a&quot;</span>, <span class="cn">NA</span>, <span class="st">&quot;b&quot;</span>),</span>
-<span id="cb19-5"><a href="#cb19-5"></a>  <span class="at">v4 =</span> <span class="fu">c</span>(<span class="st">&quot;c&quot;</span>,<span class="cn">NA</span>, <span class="cn">NA</span>),</span>
-<span id="cb19-6"><a href="#cb19-6"></a>  <span class="at">V5 =</span> <span class="fu">c</span>(<span class="cn">NA</span>, <span class="cn">NA</span>, <span class="dv">4</span>)</span>
-<span id="cb19-7"><a href="#cb19-7"></a>)</span>
-<span id="cb19-8"><a href="#cb19-8"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 3 × 5
      v1 v2    v3    v4       V5
@@ -1382,9 +1390,9 @@ margin-right: 0; }
 <h2>janitor - <code>remove_empty</code></h2>
 <p>Exemplo do uso do remove_empty removendo colunas e linhas em branco:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb21-2"><a href="#cb21-2"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb21-3"><a href="#cb21-3"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb22-2"><a href="#cb22-2"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb22-3"><a href="#cb22-3"></a>  <span class="fu">remove_empty</span>(<span class="fu">c</span>(<span class="st">&quot;rows&quot;</span>, <span class="st">&quot;cols&quot;</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 2 × 4
      v1 v3    v4       V5
@@ -1398,14 +1406,14 @@ margin-right: 0; }
 <h2>janitor - <code>remove_constant</code></h2>
 <p>Remove colunas contendo dados 100% iguais:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
-<span id="cb23-2"><a href="#cb23-2"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
-<span id="cb23-3"><a href="#cb23-3"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">&quot;Brazil&quot;</span>,<span class="st">&quot;Brazil&quot;</span>,<span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Brazil&quot;</span>),</span>
-<span id="cb23-4"><a href="#cb23-4"></a>  <span class="at">state =</span> <span class="fu">c</span>(<span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>),</span>
-<span id="cb23-5"><a href="#cb23-5"></a>  <span class="at">client_name =</span> <span class="fu">c</span>(<span class="st">&quot;João&quot;</span>, <span class="st">&quot;Maria&quot;</span>, <span class="st">&quot;José&quot;</span>, <span class="st">&quot;Fernanda&quot;</span>),</span>
-<span id="cb23-6"><a href="#cb23-6"></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="cn">NA</span>)</span>
-<span id="cb23-7"><a href="#cb23-7"></a>  )</span>
-<span id="cb23-8"><a href="#cb23-8"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1"></a>df <span class="ot">&lt;-</span> <span class="fu">tibble</span>(</span>
+<span id="cb24-2"><a href="#cb24-2"></a>  <span class="at">id =</span> <span class="fu">c</span>(<span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>),</span>
+<span id="cb24-3"><a href="#cb24-3"></a>  <span class="at">country =</span> <span class="fu">c</span>(<span class="st">&quot;Brazil&quot;</span>,<span class="st">&quot;Brazil&quot;</span>,<span class="st">&quot;Brazil&quot;</span>, <span class="st">&quot;Brazil&quot;</span>),</span>
+<span id="cb24-4"><a href="#cb24-4"></a>  <span class="at">state =</span> <span class="fu">c</span>(<span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>, <span class="st">&quot;SP&quot;</span>),</span>
+<span id="cb24-5"><a href="#cb24-5"></a>  <span class="at">client_name =</span> <span class="fu">c</span>(<span class="st">&quot;João&quot;</span>, <span class="st">&quot;Maria&quot;</span>, <span class="st">&quot;José&quot;</span>, <span class="st">&quot;Fernanda&quot;</span>),</span>
+<span id="cb24-6"><a href="#cb24-6"></a>  <span class="at">sex =</span> <span class="fu">c</span>(<span class="st">&quot;M&quot;</span>, <span class="st">&quot;F&quot;</span>, <span class="st">&quot;M&quot;</span>, <span class="cn">NA</span>)</span>
+<span id="cb24-7"><a href="#cb24-7"></a>  )</span>
+<span id="cb24-8"><a href="#cb24-8"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 5
      id country state client_name sex  
@@ -1421,9 +1429,9 @@ margin-right: 0; }
 <h2>janitor - <code>remove_constant</code></h2>
 <p>Exemplo do uso do <code>remove_constant()</code>:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb25-2"><a href="#cb25-2"></a>df <span class="sc">%&gt;%</span></span>
-<span id="cb25-3"><a href="#cb25-3"></a>  <span class="fu">remove_constant</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb26-2"><a href="#cb26-2"></a>df <span class="sc">%&gt;%</span></span>
+<span id="cb26-3"><a href="#cb26-3"></a>  <span class="fu">remove_constant</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 4 × 3
      id client_name sex  
