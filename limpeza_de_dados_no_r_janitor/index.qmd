@@ -1,5 +1,5 @@
 ---
-title: "Limpeza de dados no R: `Janitor`"
+title: "Limpeza de dados no R: `janitor`"
 author: "Wlademir Prates"
 format:
   revealjs: 
@@ -21,7 +21,7 @@ format:
 -   O R possui vários `pacotes` para limpeza e transformação de dados.
 -   Isso facilita muito todo o processo e garante a **consistência** e **confiabilidade** do estudo.
 
-## Janitor 
+## janitor 
 
 Desenvolvido tendo em mente os usuários de R do `iniciante` ao `intermediário`, é otimizado para facilidade de uso.
 
@@ -33,7 +33,7 @@ As principais funções:
 - Fornece contagens rápidas de combinações de variáveis.
 - Isola e apaga registros duplicados.
 
-## Janitor – `clean_names`
+## janitor – `clean_names`
 
 Ajusta o nome das colunas com problema de formatação, espaços e caracteres inválidos.
 
@@ -50,14 +50,14 @@ library(janitor)
 clean_names(df)
 ```
 
-## Janitor - `get_dupes`
+## janitor - `get_dupes`
 
 Apresenta os dados duplicados:
 ```{r, echo=TRUE}
 get_dupes(mtcars, mpg, hp)
 ```
 
-## Janitor - `tabyl`
+## janitor - `tabyl`
 
 Apresenta contagens rápidas dos dados das tabelas (sendo compatível com o pipe `%>%` e outros recursos):
 ```{r, echo=TRUE}
@@ -65,9 +65,36 @@ mtcars %>%
   tabyl(cyl, gear) # o mesmo que tabyl(mtcars, cyl, gear)
 ```
 
-## Janitor - `compare_df_cols`
+## janitor - `compare_df_cols` {style="font-size: 0.60em;"}
 
-Compara as colunas e apresenta as com tipos diferentes:
+Compara as colunas e apresenta os tipos diferentes:
+```{r, echo=TRUE}
+df1 <- tibble(a = 1:2, b = c("pequeno", "grande"))
+df1
+```
+
+```{r, echo=TRUE}
+df2 <- tibble(
+  a = 10:12,
+  b = as.factor(c("médio", "pequeno", "grande")),
+  c = 0
+)
+df2
+```
+
+```{r, echo=TRUE}
+df3 <- tibble(a = 3:4, b = c("médio", "grande"))
+df3
+```
+
+
+```{r, echo=TRUE}
+compare_df_cols(df1, df2, df3, return = "mismatch", bind_method = "rbind") # tente também "all" e "match"
+```
+
+## janitor - `compare_df_cols_same`
+
+Executa a mesma comparação que em `compare_df_cols`, retornando verdadeiro ou falso para a consulta:
 ```{r, echo=TRUE}
 df1 <- tibble(a = 1:2, b = c("pequeno", "grande"))
 df2 <- tibble(a = 10:12, b = as.factor(c("médio", "pequeno", "grande")), c = 0) # no exemplo, a coluna b é um fator
@@ -83,7 +110,7 @@ Executa a mesma comparação que em `compare_df_cols`, retornando verdadeiro ou 
 compare_df_cols_same(df1, df2, df3)
 ```
 
-## Janitor - `remove_empty`
+## janitor - `remove_empty` {style="font-size: 0.75em;"}
 
 Remove colunas 100% vazias (`NA`).
 
@@ -101,7 +128,7 @@ df <- tibble(
 df
 ```
 
-## Janitor - `remove_empty`
+## janitor - `remove_empty`
 
 Exemplo do uso do remove_empty removendo colunas e linhas em branco:
 ```{r, echo=TRUE}
@@ -110,7 +137,7 @@ df %>%
   remove_empty(c("rows", "cols"))
 ```
 
-## Janitor - `remove_constant`
+## janitor - `remove_constant`
 
 Remove colunas contendo dados 100% iguais:
 ```{r, echo=TRUE}
@@ -124,7 +151,7 @@ df <- tibble(
 df
 ```
 
-## Janitor - `remove_constant`
+## janitor - `remove_constant`
 
 Exemplo do uso do `remove_constant()`:
 ```{r, echo=TRUE}
@@ -138,4 +165,4 @@ df %>%
 -   [cran.r-project.org - Janitor](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
 -   [rdrr.io - Janitor](https://rdrr.io/cran/janitor/man/tabyl.html)
 
-# Limpeza de dados no R: `Janitor` {background-color="#25325f"}
+# Limpeza de dados no R: `janitor` {background-color="#25325f"}
