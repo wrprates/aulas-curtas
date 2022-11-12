@@ -1,0 +1,57 @@
+---
+title: "Título principal com `efeito`"
+subtitle: "Subtítulo do documento"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+## O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+## Slide com listas
+
+Lorem ipsum dolor sit amet.
+
+- Nam non risus a velit eleifend dictum.
+- Duis sed justo placerat, ultrices ante nec, venenatis elit.
+- Praesent posuere metus ut tincidunt laoreet.
+- Duis sagittis enim nec orci tempus ultricies.
+- Duis gravida purus eu nulla tempus fringilla.
+
+# Mudança de seção, com `ênfase` {background-color="#25325f"}
+
+Estilo subtítulo em nova seção.
+
+
+## Lorem ipsum
+
+Nam non risus a velit eleifend dictum.
+
+Duis sed justo placerat, ultrices ante nec, venenatis elit.
+
+Praesent posuere metus ut tincidunt laoreet.
+
+Duis sagittis enim nec orci tempus ultricies.
+
+Duis gravida purus eu nulla tempus fringilla.
+
+
+## Leitura complementar
+
+-   [cran.r-project.org - Janitor](https://cran.r-project.org/web/packages/janitor/vignettes/janitor.html)
+-   [rdrr.io - Janitor](https://rdrr.io/cran/janitor/man/tabyl.html)
+
+# Título principal com `efeito` {background-color="#25325f"}
+
+Subtítulo do documento
