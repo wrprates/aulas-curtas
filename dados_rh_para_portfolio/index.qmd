@@ -1,0 +1,109 @@
+---
+title: "Construa seu `portfolio` de `people analytics` com esses dados"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. Conheça o conjunto de dados de RH criado por **cientistas de dados da IBM**.
+2. Aprenda a **ler** estes dados no R.
+3. Confira **3 dicas de projetos** para seu portfolio de people analytics. `Fique até o final!`
+
+# O *dataset* de RH da IBM para demos com o `Watson` {background-color="#25325f"}
+
+<blockquote style="font-size: 0.65em;">
+- Kaggle 1: <https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset>
+- Kaggle 2: <https://www.kaggle.com/datasets/yasserh/ibm-attrition-dataset> 
+- Dicionário de Dados: <https://github.com/denistanjingyu/IBM-HR-Analytics/blob/master/Data%20Dictionary.pdf>
+- IBM: <https://www.ibm.com/watson/uk-en/talent/insights/> 
+</blockquote>
+
+## Lendo `CSV` no `R` {style="font-size: 0.70em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+df <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv"
+)
+df
+```
+
+## Detalhamento de algumas variáveis (12 de 35) {style="font-size: 0.80em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- c(
+  "Attrition",
+  "Age",
+  "Department",
+  "DistanceFromHome",
+  "Gender", 
+  "MonthlyIncome",
+  "NumCompaniesWorked",
+  "OverTime",
+  "TotalWorkingYears",
+  "YearsAtCompany",
+  "YearsSinceLastPromotion",
+  "YearsWithCurrManager"
+)
+
+profile_chart(
+  df %>% dplyr::select(variables_to_plot),
+  ncol = 4,
+  rowheight = 200,
+  # fontsize = ".8em",
+)
+```
+
+#  Dicas de `3` projetos para o seu `portfolio` de `people analytics` {background-color="#25325f"}
+
+Exemplos que podem se tornar `produtos reais`!
+
+# `#1.` Modelo de predição de *turnover* voluntário
+
+Sua **entrega** pode ser o código, um relatório de `preparação` dos dados e outro relatório com os `resultados` do modelo.
+
+Conhecimentos:
+
+<blockquote>
+- `Machine learning`.
+</blcokquote>
+
+# `#2.` Testes de hipóteses de negócio {background-color="#25325f"}
+
+Conhecimentos:
+
+<blockquote>
+- Converter hipóteses de `negócio` em testes de hipóteses `estatísticas`.
+</blcokquote>
+
+# `#3.` *Dashboard* de indicadores de RH
+
+Conhecimentos:
+
+<blockquote>
+- Ferramenta de dashboard (algum BI, R/Shiny, etc).
+- Visualização de dados.
+</blcokquote>
+
+# Construa seu `portfolio` de `people analytics` com esses dados {background-color="#25325f"}
+
+Obrigado!
