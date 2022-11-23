@@ -53,6 +53,7 @@ Veja mais: [Vídeo de *dataset* para RH no canal](https://www.youtube.com/watch?
 # Vamos aos exemplos ...
 
 ## ggplot - facet_wrap (quantidade)
+
 ```{r, echo=TRUE}
 library(ggplot2)
 
@@ -71,9 +72,11 @@ ggplot(data, aes(reorder(Gender, EmployeeCount, sum), EmployeeCount, fill = Gend
   
 ```
 ## ggplot - facet_wrap (quantidade)
+
 ```{r, echo=FALSE}
 grafico_genero_departamento_quantidade
 ```
+
 ## ggplot - facet_wrap (porcentagem)
 
 ```{r, echo=TRUE}
@@ -92,10 +95,13 @@ ggplot(data, aes(x = Gender,  group = Department)) +
   scale_fill_discrete(name = "Gender", labels = c("Female", "Male")) 
 ```
 ## ggplot - facet_wrap (porcentagem)
+
 ```{r, echo=FALSE}
 grafico_genero_departamento_porcentagem 
 ```
+
 ## ggplot - facet_grid (porcentagem)
+
 ```{r, echo=TRUE}
 grafico_horas_extras_por_departamento <-
 ggplot(data, aes(x = OverTime,  group = Department)) +
@@ -115,11 +121,14 @@ ggplot(data, aes(x = OverTime,  group = Department)) +
     labels = c("No", "Yes")
   ) 
 ```
+
 ## ggplot - facet_grid (porcentagem)
+
 ```{r, echo=FALSE}
 grafico_horas_extras_por_departamento 
 ```
 ## ggplot - facet_wrap (múltiplos diagramas)
+
 ```{r, echo=TRUE}
 grafico_departamento_demissao_voluntaria <-
 ggplot(data, aes(x = Attrition,  group = JobRole)) +
@@ -135,7 +144,9 @@ ggplot(data, aes(x = Attrition,  group = JobRole)) +
   scale_y_continuous(labels = scales::percent) +
   scale_fill_manual(values = c("#4192B5", "#E89978"), name = "Attrition", labels = c("No", "Yes"))
 ```
+
 ## ggplot - facet_wrap (múltiplos diagramas)
+
 ```{r, echo=FALSE}
 grafico_departamento_demissao_voluntaria
 ```
