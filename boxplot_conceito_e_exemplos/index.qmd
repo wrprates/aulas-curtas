@@ -1,0 +1,236 @@
+---
+title: "O que é e como usar um `Boxplot`"
+subtitle: "Série: gráficos para variáveis numéricas"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: false
+    self-contained: true
+    transition: slide
+from: markdown+emoji
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. O que é Boxplot?
+2. Um exemplo com o `rbase`
+3. Criando `versões interativas` para usar em relatórios corporativos ou *dashboards*. `Fique até o final!`
+
+# O que é Boxplot? {background-color="#25325f"} 
+
+- Gráfico para variáveis numéricas (ou quantitativas) `contínuas`.
+
+- Utiliza o chamado **esquema dos cinco números** (mínimo, primeiro quartil, mediana, terceiro quartil e máximo).
+
+- Os *outliers* podem ser escondidos ou plotados junto.
+
+## Dados para o exemplo {style="font-size: 0.80em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+data <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv"
+)
+```
+
+Primeiras linhas do dado:
+
+```{r}
+library(reactablefmtr)
+reactable::reactable(data |> head(5), theme = nytimes())
+```
+
+
+Veja mais: [Vídeo de *dataset* para RH no canal](https://www.youtube.com/watch?v=8X_qcle6A48).
+
+# Vamos aos exemplos ...
+
+## Boxplot com `rbase`
+
+```{r, echo=TRUE}
+boxplot(data$MonthlyIncome)
+```
+
+## Boxplot com `ggplot2`
+
+```{r, echo=TRUE}
+library(ggplot2)
+data |>
+  ggplot(aes(y = MonthlyIncome)) + 
+    geom_boxplot()
+```
+
+
+## Boxplot com `highcharts`
+
+```{r, echo=TRUE}
+library(highcharter)
+highchart() %>%
+  hc_add_series_list(data_to_boxplot(data, MonthlyIncome))
+```
+
+## Boxplot com `echarts`
+
+```{r, echo=TRUE}
+library(echarts4r)
+data |>
+  e_chart() |>
+  e_boxplot(MonthlyIncome)
+```
+
+# Enfeitando um pouco ... :grin: {background-color="#25325f"}
+
+Requisitos mínimos para um `boxplot` bacana:
+
+- Título e subtítulo (opcional).
+- Se interativo, `tooltip` quando passa o mouse.
+- Seguir um padrão de cores (ex.: paleta da empresa ou do cliente).
+
+## `ggplot2` customizado
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+<div style="font-size: 0.55em;">
+```{r, echo=TRUE}
+ggplot_customizado <- data |>
+  ggplot(aes(y = MonthlyIncome)) + 
+  geom_boxplot(color = "#4292b5") +
+  theme(
+    panel.background = element_rect(
+      fill='white',
+      colour='white'
+    ),
+    panel.grid.major = element_line(
+      colour = "#e8e9ed"
+    )
+  ) +
+  ggtitle(
+    "Renda mensal",
+    subtitle = "Em milhares de USD."
+  )
+```
+</div>
+
+:::
+
+::: {.column width="65%"}
+```{r, echo=FALSE}
+ggplot_customizado
+```
+:::
+
+::::
+
+## `highcharts` customizado
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+<div style="font-size: 0.60em;">
+```{r, echo=TRUE}
+highchart_customizado <- highchart() |>
+  hc_xAxis(type = "category") |>
+  hc_add_series_list(
+    data_to_boxplot(
+      data,
+      MonthlyIncome,
+      name = "Monthly Income",
+      add_outliers = TRUE
+    )
+  ) |>
+  hc_title(
+    text = "Renda mensal"
+  ) |>
+  hc_subtitle(text = "Em milhares de USD.") |>
+  hc_colors("#4292b5")
+```
+</div>
+
+:::
+
+::: {.column width="60%"}
+```{r, echo=FALSE}
+hw_grid(highchart_customizado)
+```
+:::
+
+::::
+
+## `echarts` customizado
+
+:::: {.columns}
+
+::: {.column width="40%"}
+
+<div style="font-size: 0.60em;">
+```{r, echo=TRUE}
+echart_customizado <- data |>
+  e_chart() |>
+  e_boxplot(MonthlyIncome) |>
+  e_color(color = "#4292b5") |>
+  e_tooltip() |>
+  e_title(
+    text = "Renda mensal",
+    subtext = "Em milhares de USD."
+  )
+```
+</div>
+
+:::
+
+::: {.column width="60%"}
+```{r, echo=FALSE}
+echart_customizado
+```
+:::
+
+::::
+
+# Adicionando mais categorias ao boxplot
+
+## `highcharts` - mais de um grupo
+
+```{r, echo=FALSE}
+highchart() |>
+  hc_xAxis(type = "category") |>
+  hc_add_series_list(data_to_boxplot(data, MonthlyIncome, JobRole, name = "Monthly Income")) |>
+  hc_title(text = "Renda mensal por JobRole") |>
+  hc_subtitle(text = "Em milhares de USD.") |>
+  hc_add_theme(hc_theme_bloom()) |>
+  hc_colors("#4292b5")
+```
+
+## `echarts` - mais de um grupo
+```{r}
+data |>
+  dplyr::group_by(JobRole) |>
+  e_chart() |>
+  e_boxplot(MonthlyIncome) |>
+  e_color(color = "#4292b5") |>
+  e_tooltip() |>
+  e_title(
+    text = "Renda mensal por JobRole",
+    subtext = "Em milhares de USD."
+  )
+```
+
+# O que é e como usar um `Boxplot` {background-color="#25325f"}
+
+Série: gráficos para variáveis numéricas
+
+Obrigado!
