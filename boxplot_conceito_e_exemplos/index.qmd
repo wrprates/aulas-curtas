@@ -68,7 +68,7 @@ boxplot(data$MonthlyIncome)
 ```{r, echo=TRUE}
 library(ggplot2)
 data |>
-  ggplot(aes(x = "", y = MonthlyIncome)) + 
+  ggplot(aes(y = MonthlyIncome)) + 
     geom_boxplot()
 ```
 
@@ -107,7 +107,7 @@ Requisitos mínimos para um `boxplot` bacana:
 <div style="font-size: 0.55em;">
 ```{r, echo=TRUE}
 ggplot_customizado <- data |>
-  ggplot(aes(x = "", y = MonthlyIncome)) + 
+  ggplot(aes(y = MonthlyIncome)) + 
   geom_boxplot(color = "#4292b5") +
   theme(
     panel.background = element_rect(
@@ -209,7 +209,7 @@ echart_customizado
 highchart() |>
   hc_xAxis(type = "category") |>
   hc_add_series_list(data_to_boxplot(data, MonthlyIncome, JobRole, name = "Monthly Income")) |>
-  hc_title(text = "Renda mensal por Departamento") |>
+  hc_title(text = "Renda mensal por JobRole") |>
   hc_subtitle(text = "Em milhares de USD.") |>
   hc_add_theme(hc_theme_bloom()) |>
   hc_colors("#4292b5")
@@ -224,7 +224,7 @@ data |>
   e_color(color = "#4292b5") |>
   e_tooltip() |>
   e_title(
-    text = "Renda mensal",
+    text = "Renda mensal por JobRole",
     subtext = "Em milhares de USD."
   )
 ```
