@@ -1,0 +1,145 @@
+---
+title: "Visualização de dados com o `ggplot2`"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. O que é o **ggplot**?
+2. Aprenda a gerar gráficos de plotagem múltipla com a função **facet_grid** e **facet_wrap**.
+3. Confira **3 dicas para gerar gráficos** bem dimencionados. `Fique até o final!`
+
+# O que é o ggplot? {background-color="#25325f"}
+
+- É um um pacote para criar gráficos, baseado na "Grámatica dos Gráficos".
+
+- Usa componentes semânticos, como escalas e camadas para montar e formatar as visualizações.
+
+## Dados para o exemplo {style="font-size: 0.80em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+data <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv"
+)
+```
+
+Primeiras linhas do dado:
+
+```{r}
+library(reactablefmtr)
+reactable::reactable(data |> head(5), theme = nytimes())
+```
+
+Veja mais: [Vídeo de *dataset* para RH no canal](https://www.youtube.com/watch?v=8X_qcle6A48).
+
+# Vamos aos exemplos ...
+
+## ggplot - facet_wrap (quantidade)
+```{r, echo=TRUE}
+library(ggplot2)
+
+grafico_genero_departamento_quantidade <-
+ggplot(data, aes(reorder(Gender, EmployeeCount, sum), EmployeeCount, fill = Gender)) +
+  ggtitle("Gênero por departamento") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_col() +
+  geom_text(
+    aes(label = after_stat(y), group = Gender),
+    stat = 'summary',
+    fun = sum,
+    vjust = -0.5,
+  ) + facet_wrap(~ Department, scales = "fixed") +
+  scale_y_continuous(labels = scales::number) 
+  
+```
+## ggplot - facet_wrap (quantidade)
+```{r, echo=FALSE}
+grafico_genero_departamento_quantidade
+```
+## ggplot - facet_wrap (porcentagem)
+
+```{r, echo=TRUE}
+grafico_genero_departamento_porcentagem <-
+ggplot(data, aes(x = Gender,  group = Department)) +
+  ggtitle("Gênero por departamento") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_bar(aes(y = after_stat(prop), fill = factor(..x..)), stat = "count") +
+  geom_text(aes(label = scales::percent(after_stat(prop)),
+                y = after_stat(prop)),
+            stat = "count",
+            vjust = -0.5) +
+  labs(y = "Percent", fill = "Gender") +
+  facet_wrap(~ Department) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_discrete(name = "Gender", labels = c("Female", "Male")) 
+```
+## ggplot - facet_wrap (porcentagem)
+```{r, echo=FALSE}
+grafico_genero_departamento_porcentagem 
+```
+## ggplot - facet_grid (porcentagem)
+```{r, echo=TRUE}
+grafico_horas_extras_por_departamento <-
+ggplot(data, aes(x = OverTime,  group = Department)) +
+  ggtitle("Horas extras por departamento") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_bar(aes(y = after_stat(prop), fill = factor(..x..)), stat = "count") +
+  geom_text(aes(label = scales::percent(after_stat(prop)),
+                y = after_stat(prop)),
+            stat = "count",
+            vjust = -0.5) +
+  labs(y = "Percent", fill = "OverTime") +
+  facet_grid( ~ Department) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(
+    values = c("#4192B5", "#E89978"),
+    name = "Over Time",
+    labels = c("No", "Yes")
+  ) 
+```
+## ggplot - facet_grid (porcentagem)
+```{r, echo=FALSE}
+grafico_horas_extras_por_departamento 
+```
+## ggplot - facet_wrap (múltiplos diagramas)
+```{r, echo=TRUE}
+grafico_departamento_demissao_voluntaria <-
+ggplot(data, aes(x = Attrition,  group = JobRole)) +
+  ggtitle("Demissão voluntária por cargo") +
+  theme(plot.title = element_text(hjust = 0.5)) +
+  geom_bar(aes(y = after_stat(prop), fill = factor(..x..)), stat = "count", position="dodge") +
+  geom_text(aes(label = scales::percent(after_stat(prop)),
+                y = after_stat(prop)),
+            stat = "count",
+            vjust=1, color="black", size=2.0) +
+  labs(y = "Percent", fill = "Attrition") +
+  facet_wrap(~ JobRole) +
+  scale_y_continuous(labels = scales::percent) +
+  scale_fill_manual(values = c("#4192B5", "#E89978"), name = "Attrition", labels = c("No", "Yes"))
+```
+## ggplot - facet_wrap (múltiplos diagramas)
+```{r, echo=FALSE}
+grafico_departamento_demissao_voluntaria
+```
+
+# Visualização de dados com o `ggplot2` {background-color="#25325f"}
+
+Obrigado!
