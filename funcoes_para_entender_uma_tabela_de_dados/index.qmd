@@ -1,0 +1,81 @@
+---
+title: "`Funções` para entender uma tabela de `dados`"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. head() 
+2. tail()
+3. str()
+4. summary()
+5. glimpse()
+
+
+## Lendo `CSV` no `R` {style="font-size: 0.70em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+df <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv"
+)
+df
+```
+
+## head() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+head(df)
+```
+
+## tail() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+tail(df)
+```
+
+## str() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+str(df)
+```
+
+## summary() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+summary(df)
+```
+
+## glimpse() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+library(dplyr)
+glimpse(df)
+```
+
+## unique() {style="font-size: 0.80em;"}
+
+```{r, echo=TRUE}
+unique(df)
+```
+
+# `Funções` para entender uma tabela de `dados` {background-color="#25325f"}
+
+Obrigado!
