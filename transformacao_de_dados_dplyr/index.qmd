@@ -1,0 +1,192 @@
+---
+title: "`6` funções de `transformação` de dados que você `precisa` saber"
+subtitle: "Aprenda a criar variáveis, resumir e organizar um *dataset*"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: false
+    self-contained: true
+    transition: slide
+from: markdown+emoji
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. Como **filtrar as linhas** que mais interessam.
+2. Como **selecionar** apenas as colunas que interessam.
+3. Como **ordenar** com base em alguma coluna.
+4. Como **agrupar** os dados.
+5. Como **criar variáveis** (novas colunas).
+6. Como **resumir** os dados para colocar em **apresentações**.
+
+# O pacote `dplyr` e a transformação de dados {background-color="#25325f"} 
+
+- Parte do `tidyverse` (plataforma de pacotes de *data science* do `R`).
+
+- Sintaxe muito tranquila de entender.
+
+- Intuitivo para utilizar.
+
+## Dados para o exemplo {style="font-size: 0.80em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+data <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/ibm_hr_emplyee_attrition.csv"
+)
+```
+
+Primeiras linhas do dado:
+
+```{r}
+library(reactablefmtr)
+reactable::reactable(data |> head(5), theme = nytimes())
+```
+
+
+Veja mais: [Vídeo de *dataset* para RH no canal](https://www.youtube.com/watch?v=8X_qcle6A48).
+
+# Mão na massa ...
+
+## \#1. Filtrando - `filter()`
+
+```{r, echo=TRUE, eval=FALSE}
+library(dplyr)
+
+# Filtrando por uma variável numérica
+data |> dplyr::filter(Age <= 40)
+data |> dplyr::filter(Age <= 40 & Age >= 35)
+data |> dplyr::filter(Age < 30 | Age >= 40)
+
+# Filtrando baseado em uma variável categórica
+data |> dplyr::filter(Department == "Research & Development")
+
+# Utilizando um vetor para armazenar os valores a serem filtrados
+departamentos <- c("Sales", "Research & Development")
+data |> dplyr::filter(Department %in% departamentos)
+```
+
+## \#2. Selecionando e removendo colunas - `select()`
+
+```{r, echo=TRUE, eval=FALSE}
+# Removendo colunas específicas
+data |> dplyr::select(-Age)
+
+colunas_para_remover <- c("Age", "DailyRate", "BusinessTravel")
+data |> dplyr::select(-colunas_para_remover)
+  
+# Selecionando colunas específicas
+data_selected <- data |>
+  dplyr::select(EmployeeNumber, DistanceFromHome, Attrition)
+data_selected
+```
+
+## \#3. Ordenando - `arrange()`
+
+```{r, echo=TRUE, eval=FALSE}
+# Crescente
+data_selected |> dplyr::arrange(DistanceFromHome)
+
+# Decrescente
+data_selected |> dplyr::arrange(dplyr::desc(DistanceFromHome))
+
+# Ordenando com base em mais de uma coluna
+data_selected |> dplyr::arrange(Attrition)
+data_selected |> dplyr::arrange(Attrition, DistanceFromHome)
+data_selected |> dplyr::arrange(Attrition, dplyr::desc(DistanceFromHome))
+```
+
+## \#4. Criar grupos - `group_by()`
+
+```{r, echo=TRUE, eval=FALSE}
+# Agrupar com base em uma variável categórica
+data |> dplyr::group_by(Attrition)
+data |> dplyr::group_by(BusinessTravel)
+
+# Agrupar com uma afirmação lógica para variáveis numéricas
+data |> dplyr::group_by(Age > 40)
+```
+
+## \#5. Criar variáveis - `mutate()`
+
+*Exemplo #1. Traduzindo variáveis*
+
+```{r, echo=TRUE, eval=FALSE}
+# Traduzindo os valores de uma variável (até dois valores distintos)
+data |> dplyr::distinct(Attrition)
+data |> dplyr::mutate(
+  Attrition = if_else(Attrition == "Yes", "Sim", "Não")
+)
+
+# Traduzindo os valores de uma variável (mais de dois valores distintos)
+data |> dplyr::distinct(MaritalStatus)
+data |> 
+  dplyr::mutate(
+    EstadoCivil = dplyr::case_when(
+      MaritalStatus == "Single" ~ "Solteiro",
+      MaritalStatus == "Married" ~ "Casado",
+      MaritalStatus == "Divorced" ~ "Divorciado"
+    )
+  ) |>
+  dplyr::select(EmployeeNumber, MaritalStatus, EstadoCivil)
+```
+
+## \#5. Criar variáveis - `mutate()`
+
+*Exemplo #2. Calculando um indicador*
+
+```{r, echo=TRUE, eval=FALSE}
+# Salário do funcionário em relação à mediana do seu cargo e nível
+data |>
+  dplyr::group_by(JobRole, JobLevel) |>
+  dplyr::mutate(
+    MedianaSalarial = median(MonthlyIncome, na.rm = TRUE),
+    FaixaSalarial = MonthlyIncome / median(MonthlyIncome, na.rm = TRUE)
+  ) |>
+  dplyr::ungroup() |>
+  dplyr::select(
+    EmployeeNumber,
+    JobRole,
+    JobLevel,
+    MonthlyIncome,
+    MedianaSalarial,
+    FaixaSalarial
+  )
+```
+
+## \#6. Resumir os dados - `summarise()` ou `summarize()`
+
+Crie uma tabela que servirá de **base** para a `visualização de dados`!
+
+```{r, echo=TRUE, eval=FALSE}
+# Calcular o percentual de Attrition por JobRole (cargo)
+data |> 
+  dplyr::select(JobRole, Attrition) |>
+  dplyr::group_by(JobRole) |>
+  dplyr::mutate(
+    AttritionDummy = dplyr::if_else(Attrition == "Yes", 1, 0)
+  ) |>
+  dplyr::summarise(
+    PercentAttrition = sum(AttritionDummy) / dplyr::n()
+  ) |>
+  dplyr::arrange(dplyr::desc(PercentAttrition))
+```
+
+
+# `6` funções de `transformação` de dados que você `precisa` saber {background-color="#25325f"}
+
+Aprenda a criar variáveis, resumir e organizar um *dataset*
+
+Obrigado!
