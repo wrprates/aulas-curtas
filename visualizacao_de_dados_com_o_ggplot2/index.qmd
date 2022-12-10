@@ -21,12 +21,12 @@ format:
 # Neste vídeo ...
 
 1. O que é o **ggplot**?
-2. Aprenda a gerar gráficos de plotagem múltipla com a função **facet_grid** e **facet_wrap**.
-3. Confira **3 dicas para gerar gráficos** bem dimencionados. `Fique até o final!`
+2. Aprenda a gerar gráficos de plotagem múltipla com as funções **facet_grid** e **facet_wrap**.
+3. Confira **3 dicas para gerar gráficos** bem dimensionados. `Fique até o final!`
 
-# O que é o ggplot? {background-color="#25325f"}
+# O que é o `ggplot`? {background-color="#25325f"}
 
-- É um um pacote para criar gráficos, baseado na "Grámatica dos Gráficos".
+- É um um pacote para criar gráficos, baseado na "[Grámatica dos Gráficos](https://dadosaocubo.com/introducao-a-gramatica-dos-graficos-com-plotnine/)".
 
 - Usa componentes semânticos, como escalas e camadas para montar e formatar as visualizações.
 
