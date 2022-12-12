@@ -5,9 +5,10 @@ Este repositório contém lições rápidas e objetivas sobre *data science*, ab
 As aulas presentes neste repositório são gravadas e adicionadas ao YouTube, no canal <https://www.youtube.com/@wlademir>.
 
 | Pasta                                     | Título do vídeo (clique para ver o slide)         | Link para YouTube                                 |
-|-------------------------------------------|---------------------------------------------------|---------------------------------------------------|
-| boxplot_conceito_e_exemplos               | [O que é Boxplot e como criar este gráfico na linguagem R?](https://wrprates.github.io/aulas-curtas/boxplot_conceito_e_exemplos/) | https://youtu.be/2DuotC__Ixo |
-| dados_rh_para_portfolio                   | [Construa seu portfolio de people analytics com esses dados da IBM](https://wrprates.github.io/aulas-curtas/dados_rh_para_portfolio/) | https://youtu.be/8X_qcle6A48 |
-| dicas_visualizacao_de_dados_unicornios    | [4 Dicas para melhorar sua visualização de dados](https://wrprates.github.io/aulas-curtas/dicas_visualizacao_de_dados_unicornios)   | https://youtu.be/izLSfCKRz2Q                      |
-| limpeza_de_dados_no_r_janitor             | [Limpeza de dados no R: pacote janitor](https://wrprates.github.io/aulas-curtas/limpeza_de_dados_no_r_janitor)             | https://youtu.be/59CE9hRHcng                      |
-| pipe_tidyverse_e_nativo                   | [Operadores pipe na linguagem R: pipe do magrittr (`%>%`) e nativo do R base (`\|>`)](https://wrprates.github.io/aulas-curtas/pipe_tidyverse_e_nativo/) | https://youtu.be/urA5Y0OKYhk |
+|-------------------------------------------|---------------------------------------------------|:-------------------------------------------------:|
+| `boxplot_conceito_e_exemplos`               | [O que é Boxplot e como criar este gráfico na linguagem R?](https://wrprates.github.io/aulas-curtas/boxplot_conceito_e_exemplos/) | [Aula](https://youtu.be/2DuotC__Ixo) |
+| `dados_rh_para_portfolio`                   | [Construa seu portfolio de people analytics com esses dados da IBM](https://wrprates.github.io/aulas-curtas/dados_rh_para_portfolio/) | [Aula](https://youtu.be/8X_qcle6A48) |
+| `dicas_visualizacao_de_dados_unicornios`    | [4 Dicas para melhorar sua visualização de dados](https://wrprates.github.io/aulas-curtas/dicas_visualizacao_de_dados_unicornios)   | [Aula](https://youtu.be/izLSfCKRz2Q)                      |
+| `limpeza_de_dados_no_r_janitor`             | [Limpeza de dados no R: pacote janitor](https://wrprates.github.io/aulas-curtas/limpeza_de_dados_no_r_janitor)             | [Aula](https://youtu.be/59CE9hRHcng)                      |
+| `pipe_tidyverse_e_nativo`                   | [Operadores pipe na linguagem R: pipe do magrittr (`%>%`) e nativo do R base (`\|>`)](https://wrprates.github.io/aulas-curtas/pipe_tidyverse_e_nativo/) | [Aula](https://youtu.be/urA5Y0OKYhk) |
+| `transformacao_de_dados_dplyr`              | [6 funções de transformação de dados que você precisa saber](https://wrprates.github.io/aulas-curtas/transformacao_de_dados_dplyr) | [Aula detalhada](https://youtu.be/2LFM1H2qx5Y) <br /> [Resumão](https://youtu.be/BvmC3CybbL4)|
