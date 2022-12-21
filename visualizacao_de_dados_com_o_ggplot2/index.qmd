@@ -1,6 +1,6 @@
 ---
-title: "Como criar gráficos de múltiplas facetas?"
-subtitle: "Utilizando a linguagem R e o pacote `ggplot2`"
+title: "Visualização de dados com o `ggplot2`: múltiplas facetas"
+subtitle: "Utilizando a linguagem R"
 title-slide-attributes:
   data-background-image: background.png
   data-background-opacity: "1"
@@ -21,11 +21,11 @@ format:
 
 # Neste vídeo ...
 
-1. O que é o **ggplot**?
-2. Aprenda a gerar gráficos de plotagem múltipla com as funções **facet_grid** e **facet_wrap**.
-3. Confira **3 dicas para gerar gráficos** bem dimensionados. `Fique até o final!`
+1. O que é o `ggplot2`?
+2. Aprenda a gerar gráficos de plotagem múltipla com as funções `facet_grid()` e `facet_wrap()`.
+3. Exemplo prático de *people analytics* com `ggplot2`.
 
-# O que é o `ggplot`? {background-color="#25325f"}
+# O que é o `ggplot2`? {background-color="#25325f"}
 
 - É um um pacote para criar gráficos, baseado na "[Grámatica dos Gráficos](https://dadosaocubo.com/introducao-a-gramatica-dos-graficos-com-plotnine/)".
 
@@ -53,9 +53,11 @@ Veja mais: [Vídeo de *dataset* para RH no canal](https://www.youtube.com/watch?
 
 # Vamos aos exemplos ...
 
-# Gráfico para Contagem
+# Gráficos com valores `absolutos` {background-color="#25325f"}
 
-## Gráfico de contagem de colaboradores por Gênero
+# Gráfico **base** para contagem de colaboradores por Gênero {background-color="#4192b5"}
+
+## Código
 
 ```{r, echo=TRUE}
 library(ggplot2)
@@ -68,98 +70,178 @@ grafico_contagem_genero <- ggplot2::ggplot(
     fill = Gender
   )
 ) +
-  ggplot2::labs(x = "Gender") +
   ggplot2::geom_col() +
-  scale_fill_manual(values = c("#4192B5", "#E89978"))
+  ggplot2::scale_fill_manual(values = c("#4192B5", "#E89978"))
 ```
 
-# Contagem de Gênero
+## Gráfico base - Contagem por Gênero
 ```{r}
 grafico_contagem_genero
 ```
 
-## Contagem de Gênero por Departamento - `facet_grid()`
+# Faceta por Departamento {background-color="#e8e9ed"}
 
-```{r, echo=TRUE}
+```{r, echo=TRUE, eval=FALSE}
 grafico_contagem_genero +
   ggplot2::facet_grid(~ Department)
 ```
 
-## Contagem de Gênero por Cargo - `facet_wrap()`
+## Faceta por Departamento
 
+```{r, echo=FALSE}
+grafico_contagem_genero +
+  ggplot2::facet_grid(~ Department)
+```
+
+# Faceta por Departamento e *Attrition* {background-color="#e8e9ed"}
+```{r, echo=TRUE, eval=FALSE}
+grafico_contagem_genero +
+  ggplot2::facet_grid(Attrition ~ Department)
+```
+
+## Faceta por Departamento e *Attrition*
+```{r, echo=FALSE, eval=TRUE}
+grafico_contagem_genero +
+  ggplot2::facet_grid(Attrition ~ Department)
+```
+
+# Quando a `facet_grid()` é ruim?
+
+## ⚠️ Caso de mau uso da `facet_grid()` {style="font-size: 0.95em;"}
+<div style = "text-align: center;">
+```{r, echo=TRUE}
+grafico_contagem_genero +
+  ggplot2::facet_grid(~ JobRole)
+```
+</div>
+
+## ✅ `facet_wrap()` pode resolver! {style="font-size: 0.92;"}
+<div style = "text-align: center;">
 ```{r, echo=TRUE}
 grafico_contagem_genero +
   ggplot2::facet_wrap(~ JobRole)
 ```
+</div>
 
-# Gráficos para percentual
+# Gráficos com valores `relativos`, em percentual {background-color="#25325f"}
 
-##  Tabela auxiliar para percentual de colaboradores por Gênero
+# Gráfico para percentual de colaboradores por Gênero - utilizando `facet_grid()` {background-color="#4192b5"}
+
+##  Tabela auxiliar - % por Gênero {style="font-size: 0.75em;"}
 ```{r, echo=TRUE}
 dado_genero_resumido <- data |>
   dplyr::group_by(Department, Gender) |>
-  dplyr::summarise(count_gender = dplyr::n(), .groups = "drop") |>
+  dplyr::summarise(
+    count = dplyr::n(),
+    .groups = "drop"
+  ) |>
   dplyr::group_by(Department) |>
-  dplyr::mutate(Percent = round(100 * count_gender / sum(count_gender), 2)) |>
+  dplyr::mutate(
+    Percent = round(100 * count / sum(count), 2)
+  ) |>
   dplyr::ungroup()
 ```
 
+Como fica o dado resumido?
 
-## Percentual de Gênero por Departamento - `facet_grid()`
+<div style = "text-align: center;">
+```{r, echo=FALSE}
+reactable::reactable(
+  dado_genero_resumido,
+  theme = nytimes(),
+  fullWidth = FALSE,
+  columns = list(
+    Department = colDef(minWidth = 180)
+  )
+)
+```
+</div>
 
+## % de Gênero por Departamento
 ```{r, echo=TRUE}
 grafico_percentual_genero_departamento <- ggplot2::ggplot(
-  dado_genero_resumido, aes(x=Gender, y=Percent, fill=Gender)
+  dado_genero_resumido, 
+  ggplot2::aes(
+    x = Gender,
+    y = Percent,
+    fill = Gender
+  )
 ) +
   ggplot2::geom_col() +
   ggplot2::scale_fill_manual(values = c("#4192B5", "#E89978")) +
-   ggplot2::geom_text(
-    aes(label = Percent),
+  ggplot2::facet_grid(~ Department) +
+  ggplot2::geom_text(
+    ggplot2::aes(label = Percent),
     vjust = -0.5
-  ) +
-  ggplot2::facet_grid(~ Department)
+  )
 ```
 
-## Percentual de Gênero por Departamento - `facet_grid()`
+## % de Gênero por Departamento
 
-```{r}
+```{r, echo=FALSE}
 grafico_percentual_genero_departamento
 ```
 
-# Gráficos para múltiplas facetas
+# `Case.` Quais cargos são mais críticos em termos de *turnover*? {background-color="#4192b5"}
 
-##  Tabela auxiliar para percentual de colaboradores com Demissão Voluntária por JobRole
+Mostrar o percentual de *turnover* voluntário em relação à média geral, para cada cargo.
+
+## Tabela auxiliar - % Demissão Voluntária por JobRole {style="font-size: 0.7em;"}
 ```{r, echo=TRUE}
 dado_jobrole_resumido <- data |>
   dplyr::group_by(JobRole, Attrition) |>
-  dplyr::summarise(count_attrition = dplyr::n(), .groups = "drop") |>
+  dplyr::summarise(count = dplyr::n(), .groups = "drop") |>
   dplyr::group_by(JobRole) |>
-  dplyr::mutate(Percent = round(100 * count_attrition / sum(count_attrition), 2)) |>
+  dplyr::mutate(Percent = round(100 * count / sum(count), 2)) |>
   dplyr::ungroup()
 ```
 
-## Percentual de Demissão Voluntária por Departamento - `facet_wrap()`
+Como fica o dado resumido?
 
+<div style = "text-align: center;">
+```{r, echo=FALSE}
+reactable::reactable(
+  dado_jobrole_resumido,
+  theme = nytimes(),
+  fullWidth = FALSE,
+  columns = list(
+    JobRole = colDef(minWidth = 180)
+  )
+)
+```
+
+# % de Demissão por Cargo {background-color="#e8e9ed" style="font-size: 0.7em;"}
 ```{r, echo=TRUE}
-grafico_departamento_demissao_voluntaria <- ggplot2::ggplot(
-  dado_jobrole_resumido, aes(x=Attrition, y=Percent, fill=Attrition)
-) +
+sairam <- nrow(data |> dplyr::filter(Attrition == "Yes"))
+ficaram <- nrow(data |> dplyr::filter(Attrition == "No"))
+turnover <- 100 * sairam / (sairam + ficaram)
+
+grafico_percent_attrition_jobrole <- dado_jobrole_resumido |>
+  ggplot2::ggplot(
+    ggplot2::aes(
+      x = Attrition, 
+      y = Percent,
+      fill = Attrition
+    )
+  ) +
   ggplot2::geom_col() +
   ggplot2::scale_fill_manual(values = c("#4192B5", "#E89978")) +
-   ggplot2::geom_text(
-    aes(label = Percent),
+  ggplot2::facet_wrap(~ JobRole) +
+  ggplot2::geom_text(
+    data = subset(dado_jobrole_resumido, Percent > 10),
+    ggplot2::aes(label = Percent),
+    color = "#e6e6e6",
+    vjust = 1.2,
     size = 3
   ) +
-  ggplot2::facet_wrap(~ JobRole)
+  ggplot2::geom_hline(yintercept = turnover, linetype = "dashed", size = .1)
 ```
 
-## Percentual de Demissão Voluntária por Departamento - `facet_wrap()`
-
-
+## % de Demissão por Cargo
 ```{r, echo=FALSE}
-grafico_departamento_demissao_voluntaria
+grafico_percent_attrition_jobrole
 ```
 
-# Visualização de dados com o `ggplot2` {background-color="#25325f"}
+# Visualização de dados com o `ggplot2`: múltiplas facetas {background-color="#25325f"}
 
 Obrigado!
