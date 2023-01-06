@@ -1,0 +1,31 @@
+---
+title: "Como criar um `modelo preditivo` utilizando o `ChatGPT`"
+subtitle: "Sem precisar saber de programação!"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: true
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas / vídeos **curtos** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+- Vamos pedir ao ChatGPT para executar um modelo preditivo na linguagem R utilizando uma biblioteca específica.
+- Vamos validar o código no R.
+- Vamos pedir para ele fazer a mesma coisa em Python!
+
+# Explorando o `ChatGPT` {background-color="#4192b5"}
+
+# Como criar um `modelo preditivo` utilizando o `ChatGPT` {background-color="#25325f"}
+Sem precisar saber de programação!
