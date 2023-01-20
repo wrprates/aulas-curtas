@@ -1,0 +1,46 @@
+---
+title: "6 pacotes de visualização de dados incríveis no R"
+subtitle: ""
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: ".1"
+author: "por Wlademir Prates"
+format:
+  revealjs: 
+    theme: league
+    incremental: false
+    self-contained: true
+    transition: slide
+    width: 1000
+    height: 1250
+---
+
+# 
+R é uma das linguagens mais populares para análise de dados e visualização de informações. Se você está começando a trabalhar com o R, confira esses 6 pacotes de visualização que são incríveis para quem está começando ...
+
+# `ggplot2`
+É o mais famoso para visualização de dados no R e é muito versátil. Ele permite criar gráficos de linha, barra, dispersão e muito mais.
+
+# `plotly`
+Permite criar gráficos interativos com o R, e tem uma função ggplotly() que permite transformar gráficos criados com o ggplot2 em gráficos interativos.
+
+# `echarts4r`
+É uma implementação do Echarts, uma biblioteca de visualização de dados JavaScript altamente personalizável e altamente interativa, que é compatível com uma variedade de tipos de gráficos, como gráficos de linha, barras, áreas, mapas, anéis, etc.
+
+# `dygraphs`
+Ótimo para criar gráficos de séries temporais interativos com o R, com recursos avançados de zoom e rolagem, além de suporte a várias séries de dados.
+
+# `leaflet`
+Perfeito para criar mapas interativos com o R, permitindo adicionar camadas, marcadores e pop-ups.
+
+# `highcharter`
+É um pacote para criar gráficos interativos de alta qualidade baseado no Highcharts JS, compatível com vários tipos de gráficos, incluindo gráficos de linhas, barras, áreas, mapas, etc.
+
+# Curtiu? {background-color="#4192b5"}
+
+Deixe seu *like*  e compartilhe!
+
+Insta: @wlademir_data_science
+
+YT: @wlademir
+
