@@ -1,0 +1,121 @@
+---
+title: "6 pacotes de visualização de dados incríveis no R"
+subtitle: ""
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: ".1"
+author: "por Wlademir Prates"
+format:
+  revealjs: 
+    theme: league
+    incremental: false
+    self-contained: true
+    transition: slide
+    width: 1000
+    height: 1250
+---
+
+# `R`
+R é uma das linguagens mais populares para análise de dados e visualização de informações.
+
+Se você está começando a trabalhar com o R, confira esses 6 pacotes incríveis de visualização de dados ...
+
+# `ggplot2`
+É o `mais conhecido` para visualização de dados no R e é `muito versátil`. Ele permite criar gráficos de **linha, barra, dispersão e muito mais**.
+
+```{r, echo=FALSE}
+library(ggplot2)
+library(dplyr)
+library(forcats)
+
+df <- mpg |>
+  dplyr::group_by(class) |>
+  dplyr::summarize(
+    y = dplyr::n()
+    ) |>
+  dplyr::mutate(class = fct_reorder(class, desc(y)))
+
+gg <- df |>
+  ggplot() +
+  geom_col(aes(y = y, x = class))
+
+gg
+```
+
+
+
+# `plotly`
+Permite criar `gráficos interativos` com o R, e tem a função `ggplotly()`, que permite transformar gráficos estáticos criados com o `ggplot2` em interativos.
+
+<div style="width: 100%;">
+```{r, echo=FALSE}
+library(plotly)
+ggplotly(gg)
+```
+</div>
+
+# `highcharter`
+É um pacote para criar gráficos interativos de alta qualidade baseado no Highcharts JS, compatível com vários tipos de gráficos, incluindo gráficos de linhas, barras, áreas, mapas, etc.
+
+```{r}
+library(datasets)
+library(highcharter)
+library(maps)
+data(world.cities)
+city <- world.cities %>% arrange(desc(pop)) |> head(15)
+highchart() %>% 
+  hc_chart(type = "column") %>%
+  hc_xAxis(categories = city$name, labels = list(style = list(color = "white"))) %>%
+  hc_yAxis(labels = list(style = list(color = "white"))) %>%
+  hc_add_series(name = "Population", data = city$pop, showInLegend = FALSE) |>
+  hc_title(text = "Population by cities", style = list(color = "white"))
+```
+
+# `echarts4r`
+É uma implementação do Echarts, uma biblioteca de visualização de dados JavaScript `altamente personalizável` e `altamente interativa`, que é compatível com uma `variedade de tipos de gráficos`, como gráficos de **linha, barras, áreas, mapas, anéis, etc**.
+
+```{r, echo=FALSE}
+library(echarts4r)
+library(echarts4r.maps)
+library(dplyr)
+
+data("cities")
+cities %>% 
+  filter(country == "BR") %>% 
+  mutate(val = runif(n(), 1, 2)) %>% 
+  e_charts(lon) %>%
+  em_map("BRAZIL") %>% 
+  e_geo(map = "BRAZIL") %>% 
+  e_scatter(lat, val, coord_system = "geo", scale = NULL) %>% 
+  e_visual_map(min = 1, max = 2)
+```
+
+
+# `dygraphs`
+Ótimo para criar gráficos de `séries temporais interativos` com o R, com **recursos avançados de zoom e rolagem**, além de suporte a várias séries de dados.
+
+```{r, echo=FALSE}
+library(dygraphs)
+dygraph(nhtemp, main = "New Haven Temperatures") |>
+  dyOptions(
+    colors = "#eeeeee",
+    gridLineColor = "white",
+    axisLabelColor = "white",
+    axisLineColor = "#333"
+  )
+```
+
+
+# `leaflet`
+Perfeito para criar `mapas interativos` com o R, **permitindo adicionar camadas, marcadores e pop-ups**.
+
+```{r}
+library(leaflet)
+leaflet() %>%
+  addTiles() %>%
+  addMarkers(lng = 174.768, lat = -36.852, popup = "Auckland")
+```
+
+#
+
+![](share_info.png)

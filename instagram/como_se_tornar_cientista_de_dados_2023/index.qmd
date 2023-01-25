@@ -1,0 +1,50 @@
+---
+title: "Como se tornar um cientista de dados em 2023"
+subtitle: "Salve este *post* e use-o como um *checklist* se este é seu objetivo! Não necessariamente siga a ordem."
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: ".1"
+author: "por Wlademir Prates"
+format:
+  revealjs: 
+    theme: league
+    incremental: false
+    self-contained: true
+    transition: slide
+    width: 1080
+    height: 1305
+---
+
+# Passo 1: Aprender as **habilidades básicas** {background-color="#25325f"}
+1. Começar a aprender `Python` ou `R`.
+2. Estudar `estatística` (pelo menos medidas descritivas, testes de hipóteses, regressão).
+3. Entender (pelo menos um pouco) de banco de dados e SQL.
+4. Aprender técnicas de `visualização de dados`.
+5. Familiarizar-se com ferramentas de BI (*Business Intelligence*).
+
+# Passo 2: Adquirir experiência prática {background-color="#4192b5"}
+1. Participar de `competições` de dados.
+2. Fazer `estágios` ou trabalhos voluntários.
+3. Criar um `portfolio` com dados reais e variados.
+4. Desenvolver habilidades para `comunicar` *insights* e análises para não especialistas.
+
+# Passo 3: Se tornar um especialista {background-color="#25325f"}
+1. Escolher uma área de `especialização`.
+2. Estudar *frameworks* e bibliotecas
+3. Adquirir conhecimentos em algoritmos de `Aprendizado de Máquina`.
+4. Aprender como implementar soluções de Ciência de Dados em **grande escala**.
+
+# Passo 4: Trabalhe como Cientista de Dados {background-color="#4192b5"}
+1. Buscar oportunidades em empresas que atuam com `consultoria` de *Data Science* ou que possuem uma `área de dados`.
+2. `Identificar necessidades` e problemas que podem ser resolvidos com dados.
+3. Aprender a trabalhar com `equipes multidisciplinares`
+4. Aprender a lidar com **incertezas** e lidar com **projetos complexos**.
+
+# Curtiu? {background-color="#4192b5"}
+
+Deixe seu *like*  e compartilhe!
+
+Insta: @wlademir_data_science
+
+YT: @wlademir
+
