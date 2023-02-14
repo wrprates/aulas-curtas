@@ -9,6 +9,7 @@ As aulas presentes neste repositório são gravadas e adicionadas ao YouTube, no
 | Pasta                                     | Título do vídeo (clique para ver o slide)         | Link para YouTube                                 |
 |-------------------------------------------|---------------------------------------------------|:-------------------------------------------------:|
 | `boxplot_conceito_e_exemplos`               | [O que é Boxplot e como criar este gráfico na linguagem R?](https://wrprates.github.io/aulas-curtas/boxplot_conceito_e_exemplos/) | [Aula](https://youtu.be/2DuotC__Ixo) |
+| `dados_analise_churn`                       | [Construa análises de `Churn` para seu `portfolio` com esses dados](https://wrprates.github.io/aulas-curtas/dados_analise_churn/)) | Aula |
 | `dados_rh_para_portfolio`                   | [Construa seu portfolio de people analytics com esses dados da IBM](https://wrprates.github.io/aulas-curtas/dados_rh_para_portfolio/) | [Aula](https://youtu.be/8X_qcle6A48) |
 | `dicas_visualizacao_de_dados_unicornios`    | [4 Dicas para melhorar sua visualização de dados](https://wrprates.github.io/aulas-curtas/dicas_visualizacao_de_dados_unicornios)   | [Aula](https://youtu.be/izLSfCKRz2Q)                      |
 | `limpeza_de_dados_no_r_janitor`             | [Limpeza de dados no R: pacote janitor](https://wrprates.github.io/aulas-curtas/limpeza_de_dados_no_r_janitor)             | [Aula](https://youtu.be/59CE9hRHcng)                      |
