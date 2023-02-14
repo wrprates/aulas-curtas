@@ -1,0 +1,173 @@
+---
+title: "Construa análises de `Churn` para seu `portfolio` com esses dados"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: false
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. Conheça o conjunto de dados `Telco Churn`.
+2. Aprenda a **ler** estes dados no R.
+3. Confira **3 dicas de projetos** para seu portfolio de people analytics. `Fique até o final!`
+
+# O *dataset* `Telco Customer Churn` {background-color="#25325f"}
+
+<blockquote style="font-size: 0.65em;">
+- Kaggle: <https://www.kaggle.com/datasets/blastchar/telco-customer-churn>
+- IBM: <https://www.ibm.com/docs/en/cognos-analytics/11.1.0?topic=samples-telco-customer-churn>
+- IBM fez melhorias ao *dataset*: <https://community.ibm.com/community/user/businessanalytics/blogs/steven-macko/2019/07/11/telco-customer-churn-1113>
+</blockquote>
+
+## Lendo `CSV` no `R` {style="font-size: 0.70em;"}
+
+O dado deste exemplo está no repositório <https://github.com/wrprates/open-data>.
+
+```{r, echo=TRUE}
+library(readr)
+df <- readr::read_csv(
+  "https://raw.githubusercontent.com/wrprates/open-data/master/telco_customer_churn.csv"
+) |>
+  dplyr::mutate(across(c("SeniorCitizen", where(is.character)), as.factor))
+
+df
+```
+
+## Detalhamento de algumas variáveis 1/2 - `Geral` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df %>% dplyr::select(variables_to_plot[1:10]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+## Detalhamento de algumas variáveis 1/2 - `Churn` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df |> dplyr::filter(Churn == "Yes") |> dplyr::select(variables_to_plot[1:10]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+## Detalhamento de algumas variáveis 1/2 - `No churn` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df |> dplyr::filter(Churn == "No") |> dplyr::select(variables_to_plot[1:10]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+## Detalhamento de algumas variáveis 2/2 - `Geral` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df %>% dplyr::select(variables_to_plot[11:20]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+## Detalhamento de algumas variáveis 2/2 - `Churn` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df |> dplyr::filter(Churn == "Yes") |> dplyr::select(variables_to_plot[11:20]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+## Detalhamento de algumas variáveis 2/2 - `No churn` {style="font-size: 0.70em;"}
+
+```{r}
+source("../utils.R")
+
+variables_to_plot <- setdiff(names(df), c("customerID"))
+
+profile_chart(
+  df |> dplyr::filter(Churn == "No") |> dplyr::select(variables_to_plot[11:20]),
+  ncol = 5,
+  rowheight = 280
+)
+```
+
+
+#  Dicas de `3` projetos para o seu `portfolio` de `marketing analytics` {background-color="#25325f"}
+
+Exemplos que podem se tornar `produtos reais`!
+
+# `#1.` Modelo de predição de *churn* de clientes
+
+Sua **entrega** pode ser o código, um relatório de `preparação` dos dados e outro relatório com os `resultados` do modelo.
+
+Conhecimentos:
+
+<blockquote>
+- `Machine learning`.
+</blockquote>
+
+Veja um exemplo de relatório construído com este `dataset` [aqui](https://wrprates.com/posts/predictive-customer-churn-analysis/).
+
+# `#2.` Testes de hipóteses de negócio {background-color="#25325f"}
+
+Conhecimentos:
+
+<blockquote>
+- Converter hipóteses de `negócio` em testes de hipóteses `estatísticas`.
+</blockquote>
+
+Você pode ter algumas ideias de possíveis hipóteses a partir [deste documento](https://community.ibm.com/community/user/businessanalytics/blogs/steven-macko/2019/07/11/telco-customer-churn-1113) publicado pela IBM.
+
+# `#3.` *Dashboards*
+
+Conhecimentos:
+
+<blockquote>
+- Ferramenta de dashboard (algum BI, R/Shiny, etc).
+- Visualização de dados.
+</blockquote>
+
+Você pode incluir gráficos, tabelas e indicadores, com algumas possibilidades de filtros, para `análise exploratória` ou ainda para resultados de `análise preditiva`.
+
+# Construa análises de `Churn` para seu `portfolio` com esses dados {background-color="#25325f"}
+
+Obrigado!
