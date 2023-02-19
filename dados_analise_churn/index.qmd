@@ -22,7 +22,7 @@ format:
 
 1. Conheça o conjunto de dados `Telco Churn`.
 2. Aprenda a **ler** estes dados no R.
-3. Confira **3 dicas de projetos** para seu portfolio de people analytics. `Fique até o final!`
+3. Confira **3 dicas de projetos** para seu portfolio de análise de dados. `Fique até o final!`
 
 # O *dataset* `Telco Customer Churn` {background-color="#25325f"}
 
