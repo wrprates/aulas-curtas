@@ -1,0 +1,52 @@
+---
+title: "Conheça a Linguagem R de Programação"
+subtitle: "Curiosidades e usos desta linguagem tão difundida em análise e ciência de dados"
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: ".1"
+author: "por Wlademir Prates"
+format:
+  revealjs: 
+    theme: moon
+    incremental: false
+    self-contained: true
+    transition: slide
+    width: 1080
+    height: 1305
+---
+
+# Conheça a Linguagem R de Programação {style="font-size: 1.7em;"} 
+
+Curiosidades e usos desta linguagem tão difundida em análise e ciência de dados
+
+# Introdução {background-color="#25325f" style="font-size: 1.7em;"} 
+A linguagem R de programação é uma das ferramentas mais populares para análise de dados e ciência de dados.
+
+# Linguagem R: história {style="font-size: 1.7em;"}
+A linguagem R foi desenvolvida na década de 90 por acadêmicos para aplicações estatísticas.
+
+# Uso em estatística {background-color="#4192b5"  style="font-size: 1.7em;"}
+A linguagem R é amplamente utilizada no campo da estatística para modelagem de dados e inferência estatística.
+
+# Uso em análise de dados {style="font-size: 1.7em;"}
+A linguagem R é muito utilizada em análise de dados e ciência de dados por sua capacidade de manipular e visualizar grandes quantidades de dados.
+
+# Programação orientada a objetos {background-color="#4192b5" style="font-size: 1.7em;"}
+
+A linguagem R não foi originalmente concebida como uma linguagem orientada a objetos. Porém, ela oferece recursos que **permitem programação orientada a objetos**, como o pacote `R6`, que oferece suporte a classes e objetos em R.
+
+# Big data {background-color="#4192b5" style="font-size: 1.7em;"}
+
+É possível trabalhar com grandes bancos de dados em R usando o pacote `dbplyr`, que permite enviar queries SQL escritas com código em R.
+
+O R é compatível com outras ferramentas de big data, como `Hadoop` e `Spark`.
+
+# Conclusão {background-color="#25325f" style="font-size: 1.7em;"}
+A linguagem R de programação é uma excelente escolha para análise de dados e ciência de dados.
+
+Oferece recursos avançados de processamento, visualização e modelagem de dados, bem como opções de programação orientada a objetos e suporte a *big data*.
+
+#
+
+![](share_info.png)
+
