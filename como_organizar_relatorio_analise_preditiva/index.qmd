@@ -1,0 +1,48 @@
+---
+title: "Como organizar um relatório de `análise preditiva`?"
+subtitle: "Impressione seu cliente, interno ou externo, com seu *report* de *machine learning* "
+title-slide-attributes:
+  data-background-image: background.png
+  data-background-opacity: "1"
+author: "Wlademir Prates"
+format:
+  revealjs: 
+    theme: default
+    incremental: false
+    self-contained: true
+    transition: slide
+---
+
+# O que você encontra aqui? {background-color="#25325f"}
+
+-   Aulas **curtas** e **objetivas**
+-   Repositório público:
+    -   <blockquote><https://github.com/wrprates/aulas-curtas></blockquote>
+
+# Neste vídeo ...
+
+1. Estrutura sugerida para relatório de modelo preditivo.
+2. Apresentação de um exemplo.
+
+## Estrutura sugerida {style="font-size: 0.75em" background-color="#25325f"}
+
+  1. Mostrar o `tamanho do problema`
+  2. Explicar a `metodologia da análise`
+  
+  - Pré-tratamentos nos dados
+  - *Feature selection*
+  - Metodologia de *machine learning* escolhida
+  - Importância e impacto das variáveis
+    
+  3. Mostrar onde a empresa deve `focar` suas ações (predições como um *ranking de risco*)
+  4. Análise `financeira`
+  5. Como os `dados` serão disponibilizados?
+  6. `Próximos passos` (técnicos e de negócios)
+
+# Exemplo de relatório de `machine learning`
+
+<https://wrprates.com/posts/predictive-customer-churn-analysis/>
+
+# Como organizar um relatório de `análise preditiva`?
+
+Obrigado!
