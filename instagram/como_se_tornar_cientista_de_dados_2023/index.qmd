@@ -1,6 +1,6 @@
 ---
-title: "Como se tornar um cientista de dados em 2023"
-subtitle: "Salve este *post* e use-o como um *checklist* se este é seu objetivo! Não necessariamente siga a ordem."
+title: "Como se Tornar um Cientista de Dados em 2023"
+subtitle: "Use este vídeo como um *checklist* se este é seu objetivo! Não necessariamente siga a ordem."
 title-slide-attributes:
   data-background-image: background.png
   data-background-opacity: ".1"
@@ -40,11 +40,7 @@ format:
 3. Aprender a trabalhar com `equipes multidisciplinares`
 4. Aprender a lidar com **incertezas** e lidar com **projetos complexos**.
 
-# Curtiu? {background-color="#4192b5"}
+# {background-color="#4192b5"}
 
-Deixe seu *like*  e compartilhe!
-
-Insta: @wlademir_data_science
-
-YT: @wlademir
+![](share_info.png)
 
